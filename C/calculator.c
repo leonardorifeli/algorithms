@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void main(){
+float main(){
 
   int operator;
   float x;
@@ -22,29 +22,17 @@ void main(){
   printf("Digite o segundo número (também no conjunto inteiro): \n");
   scanf("%f", &y);
 
-  if(operator == 0){
-    total = addition(20.5, 20.5);
-    printf("total: %f", total);
-    printf('\n');
-  }else if(operator == 1){
+  printf("valor de x: %f", addition(x, y));
 
-  }else if(operator == 2){
-
-  }else if(operator == 3){
-
-  }else{
-    printf("Você não digitou o número da operação. \n");
-  }
-
-  return int 0;
+  return 0;
 
 }
 
-void addition(float x, float y)
+int addition(int x, int y)
 {
-  float total = x+y;
+  int total = x+y;
 
-  return float total;
+  return total;
 }
 
 /*
