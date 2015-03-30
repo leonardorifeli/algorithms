@@ -1,0 +1,7 @@
+/C/USP/dist/
+/C/USP/build/
+C/USP/.idea/
+/C/USP/.idea/**
+C/USP/.idea*
+.idea**
+*.idea*
