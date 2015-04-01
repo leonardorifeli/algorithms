@@ -66,15 +66,15 @@ equation = CalculatorEquation.new
 
 puts "A) Please, key press the value of (a) the equation ax²+bx+c:"
 a = gets
-equation.setValueA(value = a)
+equation.setValueA(Integer(a))
 
 puts "B) Please, key press the value of (b) the equation ax²+bx+c:"
 b = gets
-equation.setValueB(value = b)
+equation.setValueB(Integer(b))
 
 puts "C) Please, key press the value of (c) the equation ax²+bx+c:"
 c = gets
-equation.setValueC(c)
+equation.setValueC(Integer(c))
 
 equation.calculatorDifference()
 equation.result()
