@@ -47,12 +47,17 @@ class CalculatorEquation
     def calculatorValuesX
         # x = ((-b)+-(Vdifferent))/2*a
 
-        difference = Math.sqrt(@difference)
-        primaryResult = ((-(@valueB))+(difference))/(2*@valueA)
-        puts "Primary square root: #{primaryResult}"
+        if @difference >= 0
+            difference = Math.sqrt(@difference)
 
-        secundaryResult = ((-(@valueB))-(difference))/(2*@valueA)
-        puts "Secundary square root: #{secundaryResult}"
+            primaryResult = ((-(@valueB))+(difference))/(2*@valueA)
+            puts "Primary square root: #{primaryResult}"
+
+            secundaryResult = ((-(@valueB))-(difference))/(2*@valueA)
+            puts "Secundary square root: #{secundaryResult}"
+        else
+            puts "This difference doesn`t exist in real numbers. Im stoped.!!!!! hahahaha"
+        end
     end
 
     def result
