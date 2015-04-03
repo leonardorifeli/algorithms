@@ -69,18 +69,24 @@ end
 
 equation = CalculatorEquation.new
 
-puts "A) Please, key press the value of (a) the equation ax²+bx+c:"
+puts "A) Please, key press the value of (a) the equation ax²+bx+c (this value is != 0):"
+
 a = gets
-equation.setValueA(Integer(a))
 
-puts "B) Please, key press the value of (b) the equation ax²+bx+c:"
-b = gets
-equation.setValueB(Integer(b))
+if Integer(a) == 0
+    puts "Please, the value of (a) is != 0"
+else
+    equation.setValueA(Integer(a))
 
-puts "C) Please, key press the value of (c) the equation ax²+bx+c:"
-c = gets
-equation.setValueC(Integer(c))
+    puts "B) Please, key press the value of (b) the equation ax²+bx+c:"
+    b = gets
+    equation.setValueB(Integer(b))
 
-equation.calculatorDifference()
-equation.result()
-equation.calculatorValuesX()
+    puts "C) Please, key press the value of (c) the equation ax²+bx+c:"
+    c = gets
+    equation.setValueC(Integer(c))
+
+    equation.calculatorDifference()
+    equation.result()
+    equation.calculatorValuesX()
+end
