@@ -56,7 +56,7 @@ class CalculatorEquation
             secundaryResult = ((-(@valueB))-(difference))/(2*@valueA)
             puts "Secundary square root: #{secundaryResult}"
         else
-            puts "This difference doesn`t exist in real numbers. Im stoped.!!!!! hahahaha"
+            puts "This difference doesn`t exist in real numbers."
         end
     end
 
