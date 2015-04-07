@@ -1,4 +1,5 @@
-#!/usr/bin/env ruby
+require 'sinatra'
+require "gnuplot"
 
 # @author leonardorifeli@gmail.com - leonardorifeli.com
 # More informations forum.leonardorifeli.com
@@ -23,23 +24,14 @@ class CalculatorEquation
     # value of secundary result of X in equation ax²+bx+c
     attr_accessor :secundaryResultX
 
-    def initialize
-        puts "This algorithm is for calculate the equation: ax²+bx+c=0 | a != 0;"
-    end
-
-    def setValueA(value)
-        @valueA = value
-    end
-
-    def setValueB(value)
-        @valueB = value
-    end
-
-    def setValueC(value)
-        @valueC = value
+    def initialize(a, b, c)
+        @valueA = a
+        @valueB = b
+        @valueC = c
     end
 
     def calculatorDifference
+        # difference = bˆ2-4.a.c
         result = (@valueB*@valueB)-(4*@valueA*@valueC)
         @difference = result
     end
@@ -51,42 +43,54 @@ class CalculatorEquation
             difference = Math.sqrt(@difference)
 
             primaryResult = ((-(@valueB))+(difference))/(2*@valueA)
-            puts "Primary square root: #{primaryResult}"
 
             secundaryResult = ((-(@valueB))-(difference))/(2*@valueA)
-            puts "Secundary square root: #{secundaryResult}"
+
+            ["Primary square root: #{primaryResult}", "Secundary square root: #{secundaryResult}"]
         else
-            puts "This difference doesn`t exist in real numbers."
+            error = "This difference doesn`t exist in real numbers."
+            [error]
         end
     end
 
-    def result
-        equation = "#{@valueA}x²+#{@valueB}x+#{@valueC}=0"
-        puts "Result of equation: #{equation}"
+    def calculate
+        self.calculatorDifference
+        self.calculatorValuesX
     end
 
 end
 
-equation = CalculatorEquation.new
+get '/equation' do
 
-puts "A) Please, key press the value of (a) the equation ax²+bx+c (this value is != 0):"
+    Gnuplot.open do |gp|
+        Gnuplot::Plot.new( gp ) do |plot|
 
-a = gets
+            plot.title  "Array Plot Example"
+            plot.ylabel "x^2"
+            plot.xlabel "x"
 
-if Integer(a) == 0
-    puts "Please, the value of (a) is != 0"
-else
-    equation.setValueA(Integer(a))
+            x = (0..50).collect { |v| v.to_f }
+            y = x.collect { |v| v ** 2 }
 
-    puts "B) Please, key press the value of (b) the equation ax²+bx+c:"
-    b = gets
-    equation.setValueB(Integer(b))
+            plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
+                ds.with = "linespoints"
+                ds.notitle
+            end
+        end
+    end
+    
+    a = params[:a].to_i
+    b = params[:b].to_i
+    c = params[:c].to_i
 
-    puts "C) Please, key press the value of (c) the equation ax²+bx+c:"
-    c = gets
-    equation.setValueC(Integer(c))
+    if a == 0
+        "Please, the value of (a) is != 0"
+    else
+        calculate = "Calculating the equation #{a}x²+#{b}x+#{c}=0"
 
-    equation.calculatorDifference()
-    equation.result()
-    equation.calculatorValuesX()
+        equation = CalculatorEquation.new a, b, c
+
+        "#{calculate}: <br/> #{equation.calculate}"
+    end
+
 end
