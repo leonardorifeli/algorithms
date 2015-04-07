@@ -1,7 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    gchartrb (0.8)
     gnuplot (2.6.2)
+    googlecharts (1.6.10)
     rack (1.6.0)
     rack-protection (1.5.3)
       rack
@@ -15,5 +17,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  gchartrb
   gnuplot
+  googlecharts (~> 1.6.10)
   sinatra

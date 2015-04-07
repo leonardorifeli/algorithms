@@ -2,3 +2,5 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'gnuplot'
+gem 'googlecharts', '~> 1.6.10'
+gem 'gchartrb'

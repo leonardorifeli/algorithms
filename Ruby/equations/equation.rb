@@ -1,5 +1,5 @@
 require 'sinatra'
-require "gnuplot"
+require 'google_chart'
 
 # @author leonardorifeli@gmail.com - leonardorifeli.com
 # More informations forum.leonardorifeli.com
@@ -25,9 +25,9 @@ class CalculatorEquation
     attr_accessor :secundaryResultX
 
     def initialize(a, b, c)
-        @valueA = a
-        @valueB = b
-        @valueC = c
+        @valueA = a.to_i
+        @valueB = b.to_i
+        @valueC = c.to_i
     end
 
     def calculatorDifference
@@ -42,15 +42,39 @@ class CalculatorEquation
         if @difference >= 0
             difference = Math.sqrt(@difference)
 
-            primaryResult = ((-(@valueB))+(difference))/(2*@valueA)
+            @primaryResult = ((-(@valueB))+(difference))/(2*@valueA)
 
-            secundaryResult = ((-(@valueB))-(difference))/(2*@valueA)
+            @secundaryResult = ((-(@valueB))-(difference))/(2*@valueA)
 
-            ["Primary square root: #{primaryResult}", "Secundary square root: #{secundaryResult}"]
+            ["Primary square root: #{@primaryResult}", "Secundary square root: #{@secundaryResult}"]
         else
             error = "This difference doesn`t exist in real numbers."
             [error]
         end
+    end
+
+    def differente
+        @difference
+    end
+
+    def getA
+        @valueA
+    end
+
+    def getB
+        @valueB
+    end
+
+    def getC
+        @valueC
+    end
+
+    def getPrimaryResult
+        @primaryResult
+    end
+
+    def getSecundaryResult
+        @secundaryResult
     end
 
     def calculate
@@ -61,36 +85,33 @@ class CalculatorEquation
 end
 
 get '/equation' do
-
-    Gnuplot.open do |gp|
-        Gnuplot::Plot.new( gp ) do |plot|
-
-            plot.title  "Array Plot Example"
-            plot.ylabel "x^2"
-            plot.xlabel "x"
-
-            x = (0..50).collect { |v| v.to_f }
-            y = x.collect { |v| v ** 2 }
-
-            plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
-                ds.with = "linespoints"
-                ds.notitle
-            end
-        end
-    end
-    
-    a = params[:a].to_i
-    b = params[:b].to_i
-    c = params[:c].to_i
-
-    if a == 0
+    if params[:a].to_i == 0
         "Please, the value of (a) is != 0"
     else
-        calculate = "Calculating the equation #{a}x²+#{b}x+#{c}=0"
 
-        equation = CalculatorEquation.new a, b, c
+        printer = "Calculating the equation:"
 
-        "#{calculate}: <br/> #{equation.calculate}"
+        equation = CalculatorEquation.new params[:a], params[:b], params[:c]
+
+        equationResolution = equation.calculate
+
+        printer = "#{printer} <br/> Calculated: #{equationResolution}"
+
+        # Scatter Chart
+        GoogleChart::ScatterChart.new('500x500',"#{equation.calculate}") do |sc|
+            sc.data "Scatter Set", [[2,1], [3,1]]
+            sc.max_value [6,6] # Setting the max value
+            sc.axis :x, :range => [(equation.getC*(-1)),equation.getC], :labels => [0,1,2,3,4,5,6]
+            sc.axis :y, :range => [(equation.getC*(-1)),equation.getC], :labels => [0,1,2,3,4,5,6]
+            #puts "\nScatter Chart"
+            #puts sc.to_url
+            url = sc.to_url
+            printer = "<img src='#{url}'/>"
+        end
+
+        #printer = "#{printer} <br/><br/> <div><img src='#{graph}'/></div>"
+
+        "#{printer}"
     end
 
 end
