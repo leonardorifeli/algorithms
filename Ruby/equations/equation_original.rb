@@ -73,18 +73,18 @@ puts "A) Please, key press the value of (a) the equation ax²+bx+c (this value i
 
 a = gets
 
-if Integer(a) == 0
+if a.to_i == 0
     puts "Please, the value of (a) is != 0"
 else
-    equation.setValueA(Integer(a))
+    equation.setValueA(a.to_i)
 
     puts "B) Please, key press the value of (b) the equation ax²+bx+c:"
     b = gets
-    equation.setValueB(Integer(b))
+    equation.setValueB(b.to_i)
 
     puts "C) Please, key press the value of (c) the equation ax²+bx+c:"
     c = gets
-    equation.setValueC(Integer(c))
+    equation.setValueC(c.to_i)
 
     equation.calculatorDifference()
     equation.result()
