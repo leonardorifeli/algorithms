@@ -89,29 +89,13 @@ get '/equation' do
         "Please, the value of (a) is != 0"
     else
 
-        printer = "Calculating the equation:"
-
         equation = CalculatorEquation.new params[:a], params[:b], params[:c]
 
         equationResolution = equation.calculate
 
-        printer = "#{printer} <br/> Calculated: #{equationResolution}"
 
-        # Scatter Chart
-        GoogleChart::ScatterChart.new('500x500',"#{equation.calculate}") do |sc|
-            sc.data "Scatter Set", [[2,1], [3,1]]
-            sc.max_value [6,6] # Setting the max value
-            sc.axis :x, :range => [(equation.getC*(-1)),equation.getC], :labels => [0,1,2,3,4,5,6]
-            sc.axis :y, :range => [(equation.getC*(-1)),equation.getC], :labels => [0,1,2,3,4,5,6]
-            #puts "\nScatter Chart"
-            #puts sc.to_url
-            url = sc.to_url
-            printer = "<img src='#{url}'/>"
-        end
+        "Calculated: #{equationResolution}"
 
-        #printer = "#{printer} <br/><br/> <div><img src='#{graph}'/></div>"
-
-        "#{printer}"
     end
 
 end
