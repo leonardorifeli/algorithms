@@ -8,9 +8,9 @@ int main(){
     printf("Please, insert the unique value: \n");
     scanf("%d", &a);
 
-    if(((a)%2) == 0){
+    if (((a)%2) == 0) {
         printf("The number is divisible per 2 \n");
-    }else{
+    } else {
         printf("the number is dosen`t divisible per 2 \n");
     }
 
