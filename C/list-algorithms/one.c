@@ -13,15 +13,15 @@ int main(){
 
     scanf("%d", &b);
 
-    if(a < b){
+    if(a < b) {
         printf("The primary value is small. \n");
     }
 
-    if(b < a){
+    if(b < a) {
         printf("The secundary value is small. \n");
     }
 
-    if(a == b){
+    if(a == b) {
         printf("The valus is equals. \n");
     }
 
