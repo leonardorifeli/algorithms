@@ -58,7 +58,7 @@ int main(){
 
     finalCalc = (scalarProduct)/(moduleVector1*moduleVector2);
 
-    angle = acos(finalCalc)* 180.0 / PI;
+    angle = acos(finalCalc) * 180.0 / PI;
 
     printf("\nFinished! The angle is: %f \n", angle);
 
