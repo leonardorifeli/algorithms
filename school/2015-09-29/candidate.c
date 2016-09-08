@@ -73,9 +73,8 @@ int main(){
     porcentVoteWhite = (totalVoteWhite > 0) ? (totalVote/totalVoteWhite)*100 : 0;
     porcentVoteNull = (totalVoteNull > 0) ? (totalVote/totalVoteNull)*100 : 0;
 
-    if(candidateMaxVote != 0){
+    if(candidateMaxVote != 0)
         printf("\nCandidate with the most votes: %d; Total votes: %d", candidateMaxVote, maxVote);
-    }
 
     printf("\nTotal of votes white: %d; Porcent: %.2f \n", totalVoteWhite, porcentVoteWhite);
     printf("\nTotal of votes null: %d; Porcent: %.2f \n", totalVoteNull, porcentVoteNull);
