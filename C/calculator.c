@@ -1,7 +1,3 @@
-/*
-* Calculaton using integer numbers;
-*/
-
 #include <stdio.h>
 #include <mach/mach.h>
 #include <mach/mach_vm.h>
@@ -25,7 +21,7 @@ void main() {
     printf("Digite o primeiro número (conjunto inteiro): \n");
     scanf("%d", &x);
 
-    printf("Digite o segundo número (também no conjunto inteiro): \n");
+    printf("Digite o segundo número (conjunto inteiro): \n");
     scanf("%d", &y);
 
     if(!(operator >= 0 && operador <= 4)) {
