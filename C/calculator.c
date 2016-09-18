@@ -6,8 +6,7 @@
 #include <mach/mach.h>
 #include <mach/mach_vm.h>
 
-int main() {
-
+void main() {
     int x;
     int y;
     int operator;
@@ -29,6 +28,11 @@ int main() {
     printf("Digite o segundo número (também no conjunto inteiro): \n");
     scanf("%d", &y);
 
+    if(!(operator >= 0 && operador <= 4)) {
+        printf("The operator inserted is not supported by system.");
+        exit;
+    }
+
     if(operator == 0){
         total = additionAction(x, y);
     }else if(operator == 1){
@@ -39,14 +43,7 @@ int main() {
         total = divisionAction(x, y);
     }else if(operator == 4){
         total = modeAction(x, y);
-    }else{
-        printf("The operator inserted is not supported by system.");
-        return 0;
     }
-
-    printf("Result calculated: %d \n", total);
-
-    return 0;
 }
 
 int additionAction(int x, int y)
