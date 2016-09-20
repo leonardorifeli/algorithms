@@ -78,7 +78,5 @@ int divisionAction(int x, int y)
 
 int modeAction(int x, int y)
 {
-    int total = (x)%(y);
-
-    return total;
+    return (x)%(y);
 }
