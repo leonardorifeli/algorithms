@@ -58,9 +58,7 @@ int additionAction(int x, int y)
 
 int subtractionAction(int x, int y)
 {
-    int total = (x)-(y);
-
-    return total;
+    return (x)-(y);
 }
 
 int multiplicationAction(int x, int y)
