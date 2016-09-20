@@ -51,9 +51,7 @@ int main() {
 
 int additionAction(int x, int y)
 {
-    int total = (x)+(y);
-
-    return total;
+    return (x)+(y);
 }
 
 int subtractionAction(int x, int y)
