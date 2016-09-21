@@ -70,9 +70,10 @@ int multiplicationAction(int x, int y)
 
 int divisionAction(int x, int y)
 {
-    int total = (x)/(y);
+    if(y == 0)
+        return 0;
 
-    return total;
+    return (x)/(y);
 }
 
 int modeAction(int x, int y)
