@@ -3,7 +3,7 @@
 
 ALGORITHMS
 =====================
-
+This repository aims to centralize all my algorithms.
 
 LICENSE
 =====================
