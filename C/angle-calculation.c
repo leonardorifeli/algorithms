@@ -32,15 +32,15 @@ int main(){
 
     printf("\n-------------------------------------------------------------\n\n");
 
-    printf("Insert the value to vector v2 for x2: ");
+    printf("Insert the value to vector v2 for x: ");
     scanf("%lf", &value);
     v2[0] = value;
 
-    printf("Insert the value to vector v2 for y2: ");
+    printf("Insert the value to vector v2 for y: ");
     scanf("%lf", &value);
     v2[1] = value;
 
-    printf("Insert the value to vector v2 for z2: ");
+    printf("Insert the value to vector v2 for z: ");
     scanf("%lf", &value);
     v2[2] = value;
 
