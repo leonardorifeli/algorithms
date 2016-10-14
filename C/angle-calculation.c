@@ -15,18 +15,18 @@ int main(){
     double finalCalc;
 
     printf("-------------------------------------------------------------\n");
-    printf("Hello! Please, insert the values for the vectors (v1 and v2):\n");
+    printf("Insert the values for the vectors (v1 and v2):\n");
     printf("-------------------------------------------------------------\n");
 
-    printf("Insert the value to vector v1 for x1: ");
+    printf("Insert the value to vector v1 for x: ");
     scanf("%lf", &value);
     v1[0] = value;
 
-    printf("Insert the value to vector v1 for y1: ");
+    printf("Insert the value to vector v1 for y: ");
     scanf("%lf", &value);
     v1[1] = value;
 
-    printf("Insert the value to vector v1 for z1: ");
+    printf("Insert the value to vector v1 for z: ");
     scanf("%lf", &value);
     v1[2] = value;
 
