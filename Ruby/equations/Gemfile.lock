@@ -4,8 +4,8 @@ GEM
     gchartrb (0.8)
     gnuplot (2.6.2)
     googlecharts (1.6.10)
-    rack (1.6.0)
-    rack-protection (1.5.3)
+    rack (1.6.13)
+    rack-protection (1.5.5)
       rack
     sinatra (1.4.6)
       rack (~> 1.4)
