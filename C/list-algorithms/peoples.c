@@ -16,9 +16,8 @@ int main(){
     printf("Please, insert the value to repetion: \n");
     scanf("%d", &repetion);
 
-    if(repetion){
-        while(count <= repetion){
-
+    if(repetion) {
+        while(count <= repetion) {
             printf("Please, insert the name: \n");
             scanf("%s", peopleName);
 
@@ -34,8 +33,7 @@ int main(){
         }
     }
 
-    if((winnerPeopleAmount > 0)){
-
+    if(winnerPeopleAmount > 0) {
         amountM = winnerPeopleAmount/repetion;
         printf("|------------------------------------------------------\n");
         printf("| The winner people is: %s \n", winnerPeopleName);
