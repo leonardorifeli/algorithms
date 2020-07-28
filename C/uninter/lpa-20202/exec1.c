@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 
+// Create a default struct to product type/properties
 struct Product{
     int item;
     char *name;
@@ -9,15 +10,21 @@ struct Product{
     float price;
 };
 
+// Define build function
 struct Product build(int item, char name[20], int code, float price);
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
+    // Input variables
     float totalBuyedPrice;
-    int displayBuyed = 0, menuItem = 0, menuBuyed = 0, buyOption, buyOptionQuantity, canFinish, buyed[100], buyedQuantity[100];
+    int displayBuyed = 0;
+    int menuItem = 0;
+    int menuBuyed = 0;
+    int buyOption, buyOptionQuantity, canFinish, buyed[100], buyedQuantity[100];
     struct Product products[7];
 
+    // Build the market menu
     products[0] = build(1, "Cachorro-quente", 100, 5.00);
     products[1] = build(2, "X-salada", 101, 8.79);
     products[2] = build(3, "X-bacon", 102, 9.99);
@@ -30,6 +37,7 @@ int main() {
     printf("****************************************************** \n");
     printf("# Item | Product         | Code | Unit price \n");
 
+    // Printing market menu (products). Total 7 products
     while(menuItem <= 6) {
         printf("# %-4d | ", products[menuItem].item);
 
@@ -43,15 +51,20 @@ int main() {
         menuItem++;
     }
 
+    // Loop to start buy products
     do {
         printf("Insert the product item to buy (0 to finish): \n");
         scanf("%d", &buyOption);
+        // Validate product menu item
         struct Product product = products[buyOption-1];
 
+        // Valide exit option
         if(buyOption == 0) {
+            // Confirm exit
             printf("Do are you sure you want to finish the buy? (1=YES or 0=NO) \n");
             scanf("%d", &canFinish);
 
+            // Validate confirmed exit
             if(canFinish == 0) {
                 buyOption = 10;
                 continue;
@@ -60,6 +73,7 @@ int main() {
             break;
         }
 
+        // Validate product exists
         if (!(product.item >= 1 && product.item <= 7)) {
             printf("\n#### Product not found. Please, check the menu and insert again. \n\n");
             printf("****************************************************** \n");
@@ -69,19 +83,23 @@ int main() {
         printf("You want buy %s product. What's quantity?\n", product.name);
         scanf("%d", &buyOptionQuantity);
 
+        // Confirm successfully added product
         printf("****************************************************** \n");
         printf("* You added %d of %s product to cart.\n", buyOptionQuantity, product.name);
         printf("****************************************************** \n\n");
 
+        // Save to buyed variables
         buyed[menuBuyed] = (product.item - 1);
         buyedQuantity[menuBuyed] = buyOptionQuantity;
 
         menuBuyed++;
     } while (buyOption != 0);
 
+    // When finished show the buyed products
     printf("\n\n****************************************************** \n");
     printf("CHECK YOUR LIST: \n");
 
+    // Loop to display buyed products
     for(displayBuyed=0; displayBuyed < menuBuyed; displayBuyed++) {
         int quantity = buyedQuantity[displayBuyed];
         if(quantity != 0) {
@@ -93,12 +111,14 @@ int main() {
         }
     }
 
+    // show total value
     printf("TOTAL VALUE: R$ %.2f \n", totalBuyedPrice);
     printf("****************************************************** \n\n");
 
     return 0;
 }
 
+// Função para montar um produto com suas propriedades
 struct Product build(int item, char name[20], int code, float price) {
     struct Product product;
     product.item = item;
