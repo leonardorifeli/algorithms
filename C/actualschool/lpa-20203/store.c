@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
 
 // Create a default struct to store type/properties
 struct Store {
@@ -17,6 +18,9 @@ void sortStores(struct Store stores[14], int totalStores);
 
 // Define showPricing function
 void showPricing(struct Store stores[14], int totalStores);
+
+// Define exportToCSV function
+void exportToCSV(struct Store stores[14], int totalStores);
 
 int main() {
     // Set Portuguese with locale
@@ -40,13 +44,14 @@ int main() {
 
         printf("[ E ] Delete a Store \n");
         printf("[ P ] Best Pricing \n");
+        printf("[ C ] Save CSV file \n");
         printf("[ S ] Exit \n");
         printf("***************************** \n");
 
         scanf("%c", &item);
 
         // Validate menu is diff of options to rescan and (to not show menu again)
-        if(item != 'S' && item != 'I' && item != 'E' && item != 'P') {
+        if(item != 'S' && item != 'I' && item != 'E' && item != 'P' && item != 'C') {
             scanf("%c", &item);
         }
 
@@ -56,6 +61,9 @@ int main() {
 
         if(item == 'P')
             showPricing(stores, insertedStores);
+
+        if(item == 'C')
+            exportToCSV(stores, insertedStores);
 
         // CreateStore option
         if(item == 'I' && totalStores <= 14) {
@@ -109,6 +117,33 @@ int main() {
     return 0;
 }
 
+// Function to export to a CSV file
+void exportToCSV(struct Store stores[14], int insertedStores) {
+    // Validate has sotres
+    if(insertedStores == 0) {
+        printf("\nSTORES NOT FOUND!\n");
+        return;
+    }
+
+    // Sort stores by pricing ASC
+    sortStores(stores, insertedStores);
+
+    int i,j;
+    FILE *file;
+    file = fopen("precos.csv", "w+");
+    fprintf(file, "Name;Phone;Price\n");
+
+    for (i = 0; i < insertedStores; i++) {
+        if(stores[i].price != 0)
+            fprintf(file,"%s;%2.f;%2.f\n", stores[i].name, stores[i].phone, stores[i].price);
+    }
+
+    fclose(file);
+
+    printf("GENERATE CSV FILE");
+}
+
+// Function to show pricing only
 void showPricing(struct Store stores[14], int insertedStores) {
     // Sort stores by pricing ASC
     sortStores(stores, insertedStores);
@@ -162,7 +197,7 @@ struct Store createStore() {
 
     printf("- Phone of store: ");
     scanf("%lf", &store.phone);
-    
+
     printf("- Table pricing: ");
     scanf("%f", &store.price);
 
