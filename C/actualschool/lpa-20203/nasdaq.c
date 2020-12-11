@@ -21,11 +21,16 @@ int main() {
     // Set Portuguese with locale
     setlocale(LC_ALL, "Portuguese");
 
+    // Define totalStocks and stockToAlloc (dynamic array allocator)
     int totalStocks = 0, stockToAlloc = 5, item, i;
+
+    // Create stockExchanges array to malloc dynamic allocator
     struct StockExchange *stockExchanges;
 
+    // Create dynamic array allocator
     stockExchanges = (struct StockExchange *) malloc(sizeof(struct StockExchange) * 5);
 
+    // Validate success on malloc
     if(stockExchanges == NULL) {
         printf("Failed to malloc stockChanges array. \n");
         return 0;
@@ -36,6 +41,7 @@ int main() {
         printf("\nWELCOME TO RIFELI'S STOCK EXCHANGE (RU 2136681). \n");
         printf("***************************** \n");
 
+        // Validate can create a new stock exchange
         if(totalStocks <= 5)
             printf("[ 1 ] Create an stock exchange (%d created) \n", totalStocks);
 
@@ -49,11 +55,13 @@ int main() {
         if(item == 3)
             break;
 
-        if(item == 1) {
+        // Validate is to create and can create
+        if(item == 1 && totalStocks <= 5) {
             stockExchanges[totalStocks] = createStockExchange();
             totalStocks++;
-        }
+        } 
 
+        // Show all stockExchanges 
         if(item == 2) {
             for(i=0; i < totalStocks; i++) {
                 printf("- [ID %d] Code: %d \n", i, stockExchanges[i].code);
@@ -69,6 +77,7 @@ int main() {
                 printf("        Close value: %2.f \n", stockExchanges[i].closeValue);
                 printf("        Variation Percent: %2.f%%\n", stockExchanges[i].variationPercent);
 
+                // Validate variationPercent is increase, equal or decrease
                 if(stockExchanges[i].variationPercent > 0)
                     printf("        Status: (+ increased)\n");
                 else if(stockExchanges[i].variationPercent == 0)
@@ -104,6 +113,7 @@ struct StockExchange createStockExchange() {
     printf("- Close value (ex 200): ");
     scanf("%lf", &stock.closeValue);
 
+    // Validate closeValue != 0 to variation percent calculate ((new-old) / new * 100) generic formula to calculate percent variance
     if(stock.closeValue != 0)
         variationPercent = (stock.closeValue - stock.openValue) / stock.closeValue * 100;
 
